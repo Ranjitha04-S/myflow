@@ -1,0 +1,1450 @@
+:root {
+    --bg: #ede8e0;
+    --surface: #ffffff;
+    --surface2: #f0ede7;
+    --border: #e8e3da;
+    --text: #2c2825;
+    --text2: #7a7269;
+    --accent: #c8956c;
+    --accent2: #8faf8b;
+    --accent3: #7b9ec0;
+    --accent4: #c4879b;
+    --accent5: #b5a06a;
+    --danger: #d4706a;
+    --shadow: 0 2px 12px rgba(44, 40, 37, .08);
+    --shadow2: 0 4px 24px rgba(44, 40, 37, .12);
+    --r: 16px;
+    --r2: 10px;
+    --nav-h: 64px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text)
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden
+}
+
+/* LOGIN */
+#login-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px
+}
+
+.login-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    color: var(--accent);
+    margin-bottom: 4px
+}
+
+.login-tag {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 38px
+}
+
+.login-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: var(--shadow2);
+    border: 1px solid var(--border)
+}
+
+.login-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center
+}
+
+.lf {
+    margin-bottom: 14px
+}
+
+.lf label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: 5px
+}
+
+.lf input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r2);
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color .18s
+}
+
+.lf input:focus {
+    border-color: var(--accent)
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: var(--r2);
+    background: var(--accent);
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background .18s
+}
+
+.login-btn:active {
+    background: var(--accent-d)
+}
+
+.login-err {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+    display: none
+}
+
+.login-sw {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--text2)
+}
+
+.login-sw a {
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 500
+}
+
+/* ── APP SHELL ── */
+#app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    display: none
+}
+
+#app-shell.visible {
+    display: flex
+}
+
+/* ── NAV ── */
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 -2px 16px rgba(44, 40, 37, .07);
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    color: var(--text2);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 500;
+    transition: color .2s;
+    border-radius: 12px;
+    letter-spacing: .02em;
+}
+
+.nav-btn.active {
+    color: var(--accent)
+}
+
+.nav-btn svg {
+    width: 22px;
+    height: 22px
+}
+
+/* ── PAGES ── */
+.pages {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: calc(var(--nav-h)+12px)
+}
+
+.page {
+    display: none;
+    padding: 20px 16px;
+    max-width: 600px;
+    margin: 0 auto
+}
+
+.page.active {
+    display: block
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px
+}
+
+.page-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.15
+}
+
+.page-header p {
+    color: var(--text2);
+    font-size: 13px;
+    margin-top: 2px
+}
+
+/* ── BUTTONS ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: var(--r2);
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity .18s, transform .14s;
+}
+
+.btn:active {
+    transform: scale(.97)
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff
+}
+
+.btn-ghost {
+    background: var(--surface2);
+    color: var(--text)
+}
+
+.btn-sm {
+    padding: 7px 13px;
+    font-size: 13px
+}
+
+.fab {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200, 149, 108, .45);
+    transition: transform .15s, box-shadow .15s;
+}
+
+.fab:active {
+    transform: scale(.93)
+}
+
+/* ── CARDS ── */
+.card {
+    background: var(--surface);
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(44, 40, 37, .45);
+    backdrop-filter: blur(4px);
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.modal-overlay.open {
+    display: flex
+}
+
+.modal {
+    background: var(--surface);
+    border-radius: var(--r) var(--r) 0 0;
+    width: 100%;
+    max-width: 600px;
+    padding: 24px 20px 32px;
+    box-shadow: var(--shadow2);
+    animation: slideUp .28s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(60px);
+        opacity: 0
+    }
+}
+
+.modal h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 18px
+}
+
+.modal-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    margin: 0 auto 18px
+}
+
+/* Task detail: use right-side panel (kanban) */
+#task-detail-modal.open {
+    align-items: stretch;
+    justify-content: flex-end
+}
+
+#task-detail-modal .modal {
+    width: 420px;
+    max-width: 420px;
+    border-radius: 0 0 0 0;
+    height: 100%;
+    padding: 20px;
+    box-shadow: var(--shadow2);
+    border-left: 1px solid var(--border);
+    overflow-y: auto
+}
+
+#task-detail-modal .modal-handle {
+    display: none
+}
+
+/* ── FORM ── */
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 6px;
+    margin-top: 14px;
+}
+
+label:first-child {
+    margin-top: 0
+}
+
+input[type=text],
+input[type=number],
+input[type=date],
+input[type=time],
+select,
+textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r2);
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color .18s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent)
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px
+}
+
+.form-row {
+    display: flex;
+    gap: 10px
+}
+
+.form-row>* {
+    flex: 1
+}
+
+/* ── COLOR CHIPS ── */
+.color-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px
+}
+
+.chip {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2.5px solid transparent;
+    transition: transform .15s, border-color .15s;
+}
+
+.chip.sel {
+    border-color: var(--text);
+    transform: scale(1.15)
+}
+
+/* ── GOOGLE-TASKS STYLE ADD FORM ── */
+.gtask-form {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r);
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow2);
+    display: none;
+}
+
+.gtask-form.open {
+    display: block
+}
+
+.gtask-input {
+    width: 100%;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    outline: none;
+    padding: 4px 0;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 12px;
+}
+
+.gtask-input::placeholder {
+    color: var(--text2)
+}
+
+.gtask-desc {
+    width: 100%;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    resize: none;
+    min-height: 40px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+}
+
+.gtask-desc::placeholder {
+    color: var(--text2)
+}
+
+.gtask-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px
+}
+
+.gtask-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+}
+
+.gtask-pill.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent)
+}
+
+.gtask-pill svg {
+    width: 14px;
+    height: 14px
+}
+
+.gtask-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.gtask-color-row {
+    display: flex;
+    gap: 6px;
+    align-items: center
+}
+
+.gtask-mini-chip {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform .15s, border-color .15s;
+}
+
+.gtask-mini-chip.sel {
+    border-color: var(--text);
+    transform: scale(1.15)
+}
+
+/* ── LEETCODE-STYLE CALENDAR KANBAN ── */
+.leet-cal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+}
+
+.leet-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.leet-cal-header .month-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+}
+
+.leet-cal-header .nav-row {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.leet-nav-btn {
+    background: var(--surface2);
+    border: none;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.cal-grid-wrap {
+    overflow-x: auto
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    min-width: 280px;
+}
+
+.cal-dow {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text2);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+}
+
+.cal-day {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: default;
+    position: relative;
+    transition: background .2s;
+}
+
+.cal-day.has-task {
+    cursor: pointer
+}
+
+.cal-day.empty {
+    background: transparent
+}
+
+.cal-day.past-day {
+    background: var(--surface2);
+    color: var(--text2);
+    opacity: .5
+}
+
+.cal-day.future-day {
+    background: var(--surface2);
+    color: var(--text2);
+    opacity: .35
+}
+
+.cal-day.today-day {
+    background: var(--accent) !important;
+    color: #fff !important;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(200, 149, 108, .4);
+}
+
+.cal-day.done-day {
+    color: #fff !important;
+    font-weight: 600
+}
+
+.cal-day.active-task-day {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+}
+
+.cal-dots {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2px;
+}
+
+.cal-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%
+}
+
+/* ── TASK SECTION (simplified kanban) ── */
+.task-section {
+    margin-bottom: 16px
+}
+
+.task-section-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.task-list-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: box-shadow .18s;
+}
+
+.task-list-item:active {
+    box-shadow: none
+}
+
+.task-check-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, border-color .2s;
+}
+
+.task-check-circle.checked {
+    border-color: transparent
+}
+
+.task-check-circle svg {
+    width: 12px;
+    height: 12px
+}
+
+.task-item-info {
+    flex: 1;
+    min-width: 0
+}
+
+.task-item-name {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.task-item-meta {
+    font-size: 11px;
+    color: var(--text2);
+    margin-top: 2px;
+    display: flex;
+    gap: 6px;
+    align-items: center
+}
+
+.task-item-streak {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--surface2);
+}
+
+.task-color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0
+}
+
+/* ── COMPLETED BUTTON ── */
+.completed-btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, var(--accent2), #6d9a69);
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity .18s, transform .14s;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 16px rgba(143, 175, 139, .35);
+}
+
+.completed-btn:active {
+    transform: scale(.97)
+}
+
+.completed-btn.already-done {
+    background: linear-gradient(135deg, #b5cdb3, #9ab898);
+    opacity: .7;
+    cursor: default;
+}
+
+.completed-btn svg {
+    width: 20px;
+    height: 20px
+}
+
+/* ── HOME ── */
+.motive-card {
+    border-radius: var(--r);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+    aspect-ratio: 16/7;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.motive-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0
+}
+
+.motive-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text2);
+    z-index: 1
+}
+
+.motive-placeholder svg {
+    width: 36px;
+    height: 36px;
+    opacity: .5
+}
+
+.motive-placeholder p {
+    font-size: 13px
+}
+
+.motive-edit-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    background: rgba(255, 255, 255, .85);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    backdrop-filter: blur(4px);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#motivate-file {
+    display: none
+}
+
+.section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.quote-card {
+    background: linear-gradient(135deg, #fef9f4, #f9f0e4);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-card::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 80px;
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    color: var(--accent);
+    opacity: .18;
+    line-height: 1;
+}
+
+.quote-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+    padding-left: 8px;
+}
+
+.today-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+}
+
+.today-strip::-webkit-scrollbar {
+    display: none
+}
+
+.today-pill {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    border-radius: 50px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow);
+}
+
+/* ── TASK DETAIL MODAL ── */
+.day-numbers-label {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 3px
+}
+
+.day-num-hdr {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text2);
+    letter-spacing: .05em;
+    text-transform: uppercase
+}
+
+.day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+}
+
+.day-cell.done {
+    border-color: transparent;
+    color: #fff !important
+}
+
+.day-cell.today-mark {
+    border-width: 2px;
+    font-weight: 700
+}
+
+/* ── FOOD ── */
+.month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px
+}
+
+.month-nav span {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px
+}
+
+.month-nav button {
+    background: var(--surface2);
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.food-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow)
+}
+
+table.food-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+    font-size: 12px
+}
+
+.food-table thead th {
+    padding: 10px 8px;
+    background: var(--surface2);
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap
+}
+
+.food-table thead th:first-child {
+    text-align: center;
+    width: 40px;
+    background: var(--bg)
+}
+
+.food-table tbody tr:nth-child(even) td {
+    background: #faf8f5
+}
+
+.food-table tbody td {
+    border-bottom: 1px solid var(--border);
+    padding: 2px 4px;
+    vertical-align: middle;
+    text-align: center
+}
+
+.food-table tbody td:first-child {
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--text2);
+    background: var(--surface2) !important;
+    width: 40px
+}
+
+.food-cell {
+    width: 100%;
+    min-height: 32px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    text-align: center;
+    color: var(--text);
+    outline: none;
+    resize: none;
+    padding: 4px 3px;
+    line-height: 1.3;
+    cursor: text;
+    display: block
+}
+
+.food-cell:focus {
+    background: #fff7f0;
+    border-radius: 4px
+}
+
+.food-table tfoot td {
+    background: var(--surface2);
+    padding: 8px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text2)
+}
+
+/* ── NOTES ── */
+.notes-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px
+}
+
+.notes-search {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--surface);
+    outline: none
+}
+
+.notes-search:focus {
+    border-color: var(--accent)
+}
+
+.note-card {
+    background: var(--surface);
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: box-shadow .18s;
+    box-shadow: var(--shadow)
+}
+
+.note-card:active {
+    box-shadow: none
+}
+
+.note-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px
+}
+
+.note-title {
+    font-weight: 600;
+    font-size: 15px
+}
+
+.note-date {
+    font-size: 11px;
+    color: var(--text2)
+}
+
+.note-preview {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden
+}
+
+.note-tags {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+    flex-wrap: wrap
+}
+
+.tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500
+}
+
+.note-editor {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: var(--bg);
+    flex-direction: column
+}
+
+.note-editor.open {
+    display: flex
+}
+
+.editor-toolbar {
+    padding: 14px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface)
+}
+
+.editor-toolbar input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    outline: none;
+    color: var(--text)
+}
+
+.editor-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px
+}
+
+.editor-textarea {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text);
+    outline: none;
+    resize: none
+}
+
+.editor-meta {
+    padding: 10px 16px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    flex-wrap: wrap
+}
+
+.tag-input {
+    border: 1.5px dashed var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    background: none;
+    font-family: inherit;
+    outline: none;
+    width: 100px;
+    color: var(--text)
+}
+
+/* ── KANBAN LABEL ── */
+.kanban-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px
+}
+
+.lbl-todo {
+    background: #f0ede7;
+    color: #7a7269
+}
+
+.lbl-doing {
+    background: #fef0e4;
+    color: #c8956c
+}
+
+.lbl-done {
+    background: #eaf3ea;
+    color: #5a8c56
+}
+
+/* ── TOAST ── */
+.toast {
+    position: fixed;
+    bottom: calc(var(--nav-h)+12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 400;
+    opacity: 0;
+    transition: opacity .25s, transform .25s;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0)
+}
+
+/* ── MISC ── */
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: 14px 0
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.empty-state {
+    text-align: center;
+    padding: 36px 20px;
+    color: var(--text2)
+}
+
+.empty-state svg {
+    width: 48px;
+    height: 48px;
+    opacity: .35;
+    margin-bottom: 10px
+}
+
+.empty-state p {
+    font-size: 14px
+}
+
+.close-btn {
+    background: var(--surface2);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text2);
+    flex-shrink: 0
+}
+
+/* Priority badge */
+.prio-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.prio-high {
+    background: #ffeaea;
+    color: #d4706a
+}
+
+.prio-medium {
+    background: #fff5e0;
+    color: #c8956c
+}
+
+.prio-low {
+    background: #eaf3ea;
+    color: #5a8c56
+}
+
+/* Add task row */
+.add-task-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1.5px dashed var(--border);
+    cursor: pointer;
+    color: var(--text2);
+    font-size: 14px;
+    transition: border-color .2s, background .2s;
+    margin-bottom: 12px;
+}
+
+.add-task-row:hover {
+    border-color: var(--accent);
+    background: var(--accent)08
+}
+
+.add-task-row svg {
+    width: 18px;
+    height: 18px
+}
+
+/* Section toggle */
+.section-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 0;
+    user-select: none;
+}
+
+.section-toggle h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text2);
+    letter-spacing: .06em;
+    text-transform: uppercase
+}
+
+.section-toggle .arrow {
+    transition: transform .2s;
+    font-size: 10px;
+    color: var(--text2)
+}
+
+.section-toggle.collapsed .arrow {
+    transform: rotate(-90deg)
+}
+
+@media(min-width:600px) {
+    .task-sections {
+        display: flex;
+        gap: 16px
+    }
+
+    .task-section {
+        flex: 1
+    }
+}

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>MyFlow — Habit Tracker</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="login-screen">
+    <div class="login-logo">MyFlow</div>
+    <p class="login-tag">Your personal habit & life tracker</p>
+    <div class="login-card">
+      <h2 id="atitle">Welcome back</h2>
+      <div class="lf">
+        <label>Username</label>
+        <input type="text" id="auser" placeholder="Enter username" autocomplete="username">
+      </div>
+      <div class="lf" id="anamef" style="display:none">
+        <label>Your Name</label>
+        <input type="text" id="aname" placeholder="Display name">
+      </div>
+      <div class="lf">
+        <label>Password</label>
+        <input type="password" id="apass" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <div class="lf" id="ap2f" style="display:none">
+        <label>Confirm Password</label>
+        <input type="password" id="apass2" placeholder="Repeat password" autocomplete="new-password">
+      </div>
+      <button class="login-btn" id="asubmit">Sign In</button>
+      <div class="login-err" id="aerr">&nbsp;</div>
+      <div class="login-sw">
+        <span id="aswtxt">Don't have an account?</span>
+        <a id="aswbtn"> Sign up</a>
+      </div>
+      <!-- <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--text2)">Default: user / 1234</div> -->
+    </div>
+  </div>
+
+  <!-- ═══ APP SHELL ═══ -->
+  <div id="app-shell">
+    <div class="pages" id="pages">
+
+      <!-- HOME -->
+      <div class="page active" id="page-home">
+        <div class="page-header">
+          <div>
+            <h1 id="home-greeting">Good Morning 🌤</h1>
+            <p id="today-date"></p>
+          </div>
+          <button class="close-btn" id="logout-btn" title="Logout" style="background:var(--surface2)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="motive-card" id="motive-card">
+          <img id="motive-img" src="" alt="" style="display:none">
+          <div class="motive-placeholder" id="motive-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <path d="M3 14l5-5 4 4 3-3 6 6" />
+            </svg>
+            <p>Tap to add your motivation image</p>
+          </div>
+          <button class="motive-edit-btn" id="motive-edit-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+            </svg>
+            Change
+          </button>
+        </div>
+        <input type="file" id="motivate-file" accept="image/*">
+
+        <div class="quote-card">
+          <div class="quote-text" id="daily-quote">....</div>
+        </div>
+
+        <div class="section-title">Today's Habits</div>
+        <div class="today-strip" id="today-strip">
+          <div style="color:var(--text2);font-size:13px;padding:10px 0">No habits yet. Add from Tasks →</div>
+        </div>
+
+        <div class="section-title" style="margin-top:4px">Quick Stats</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:8px">
+          <div class="card" style="text-align:center;padding:14px 8px">
+            <div style="font-size:22px;font-weight:700;font-family:'DM Serif Display',serif" id="stat-total">0</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Total Tasks</div>
+          </div>
+          <div class="card" style="text-align:center;padding:14px 8px">
+            <div style="font-size:22px;font-weight:700;font-family:'DM Serif Display',serif;color:var(--accent2)"
+              id="stat-done">0</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Completed</div>
+          </div>
+          <div class="card" style="text-align:center;padding:14px 8px">
+            <div style="font-size:22px;font-weight:700;font-family:'DM Serif Display',serif;color:var(--accent)"
+              id="stat-streak">0</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Today Done</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASKS -->
+      <div class="page" id="page-tasks">
+        <div class="page-header">
+          <div>
+            <h1>My Tasks</h1>
+            <p>Daily habits & goals</p>
+          </div>
+          <button class="fab" id="add-task-btn" style="width:44px;height:44px;font-size:22px">+</button>
+        </div>
+
+        <!-- Google Tasks style quick add -->
+        <div class="gtask-form" id="gtask-form">
+          <input class="gtask-input" id="gt-name" placeholder="Task title" autocomplete="off">
+          <textarea class="gtask-desc" id="gt-desc" placeholder="Notes (optional)" rows="2"></textarea>
+          <div class="gtask-pills">
+            <div class="gtask-pill" id="gt-pill-date">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              <span id="gt-date-label">Start date</span>
+              <input type="date" id="gt-date" style="position:absolute;opacity:0;width:1px;height:1px">
+            </div>
+            <div class="gtask-pill" id="gt-pill-duration">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span id="gt-dur-label">Duration</span>
+            </div>
+            <div class="gtask-pill" id="gt-pill-prio" data-prio="medium">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <span id="gt-prio-label">Medium</span>
+            </div>
+          </div>
+          <!-- Duration sub-form (hidden by default) -->
+          <div id="gt-dur-sub" style="display:none;margin-bottom:12px">
+            <select id="gt-dur-type" style="margin-bottom:8px">
+              <option value="inf">∞ Infinite (ongoing)</option>
+              <option value="custom">Custom days</option>
+            </select>
+            <input type="number" id="gt-dur-days" placeholder="Number of days" min="1" style="display:none">
+          </div>
+          <div class="gtask-actions">
+            <div class="gtask-color-row" id="gt-colors">
+              <div class="gtask-mini-chip sel" style="background:#c8956c" data-c="#c8956c"></div>
+              <div class="gtask-mini-chip" style="background:#8faf8b" data-c="#8faf8b"></div>
+              <div class="gtask-mini-chip" style="background:#7b9ec0" data-c="#7b9ec0"></div>
+              <div class="gtask-mini-chip" style="background:#c4879b" data-c="#c4879b"></div>
+              <div class="gtask-mini-chip" style="background:#b5a06a" data-c="#b5a06a"></div>
+              <div class="gtask-mini-chip" style="background:#9b7ec8" data-c="#9b7ec8"></div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-ghost btn-sm" id="gt-cancel">Cancel</button>
+              <button class="btn btn-primary btn-sm" id="gt-save">Add Task</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendar View (Leetcode-style) -->
+        <div class="leet-cal" id="leet-cal-wrap">
+          <div class="leet-cal-header">
+            <span class="month-label" id="leet-month-label"></span>
+            <div class="nav-row">
+              <button class="leet-nav-btn" id="leet-prev">‹</button>
+              <button class="leet-nav-btn" id="leet-next">›</button>
+            </div>
+          </div>
+          <div class="cal-grid-wrap">
+            <div class="cal-grid" id="leet-cal-grid"></div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--accent)"></div> Today
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--accent2)"></div> Completed
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)">
+              <div
+                style="width:12px;height:12px;border-radius:3px;background:var(--surface2);border:1px solid var(--border)">
+              </div> Pending
+            </div>
+          </div>
+        </div>
+
+        <!-- Task sections -->
+        <div id="task-sections"></div>
+      </div>
+
+      <!-- FOOD -->
+      <div class="page" id="page-food">
+        <div class="page-header">
+          <div>
+            <h1>Food Journal</h1>
+            <p>Log meals month by month</p>
+          </div>
+        </div>
+        <div class="month-nav">
+          <button id="food-prev">‹</button>
+          <span id="food-month-label"></span>
+          <button id="food-next">›</button>
+        </div>
+        <div class="food-table-wrap">
+          <table class="food-table" id="food-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Early Morning</th>
+                <th>Breakfast</th>
+                <th>Mid Morning</th>
+                <th>Lunch</th>
+                <th>Evening</th>
+                <th>Dinner</th>
+              </tr>
+            </thead>
+            <tbody id="food-tbody"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="7">Tap any cell to log your meal</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- NOTES -->
+      <div class="page" id="page-notes">
+        <div class="page-header">
+          <div>
+            <h1>Notes</h1>
+            <p>Plans, reminders & events</p>
+          </div>
+          <button class="fab" id="add-note-btn" style="width:44px;height:44px;font-size:22px">+</button>
+        </div>
+        <div class="notes-toolbar">
+          <input type="text" class="notes-search" id="notes-search" placeholder="Search notes…">
+        </div>
+        <div id="notes-list"></div>
+      </div>
+
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <button class="nav-btn active" data-page="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
+          <path d="M9 21V12h6v9" />
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-btn" data-page="tasks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="5" width="18" height="15" rx="2" />
+          <path d="M3 10h18M8 3v4M16 3v4" />
+        </svg>
+        <span>Tasks</span>
+      </button>
+      <button class="nav-btn" data-page="food">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+          <circle cx="7" cy="6" r="1" fill="currentColor" />
+          <circle cx="7" cy="12" r="1" fill="currentColor" />
+          <circle cx="7" cy="18" r="1" fill="currentColor" />
+        </svg>
+        <span>Food</span>
+      </button>
+      <button class="nav-btn" data-page="notes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+        <span>Notes</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ═══ TASK DETAIL MODAL ═══ -->
+  <div class="modal-overlay" id="task-detail-modal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="flex-between" style="margin-bottom:12px">
+        <h2 id="td-name" style="margin:0;font-size:22px"></h2>
+        <button class="close-btn" id="td-close">×</button>
+      </div>
+      <div id="td-meta" style="font-size:13px;color:var(--text2);margin-bottom:14px"></div>
+
+      <!-- Month calendar for this task (read-only) -->
+      <div id="td-month-cal-wrap" class="leet-cal" style="margin-bottom:12px">
+        <div class="leet-cal-header">
+          <span class="month-label" id="td-month-label"></span>
+          <div class="nav-row">
+            <button class="leet-nav-btn" id="td-cal-prev">‹</button>
+            <button class="leet-nav-btn" id="td-cal-next">›</button>
+            <input type="month" id="td-cal-picker"
+              style="margin-left:8px;border-radius:8px;padding:6px;border:1px solid var(--border);background:var(--surface);font-size:13px">
+          </div>
+        </div>
+        <div class="cal-grid-wrap">
+          <div class="cal-grid" id="td-month-grid"></div>
+        </div>
+      </div>
+
+      <!-- COMPLETED BUTTON -->
+      <button class="completed-btn" id="td-complete-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        Mark Today as Completed
+      </button>
+
+      <div class="divider"></div>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button class="btn btn-ghost btn-sm" id="td-edit" style="flex:1">Edit</button>
+        <button class="btn btn-sm" style="flex:1;background:#fff0ef;color:var(--danger)" id="td-delete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT TASK MODAL -->
+  <div class="modal-overlay" id="task-edit-modal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h2 id="task-modal-title">Edit Task</h2>
+      <label>Task Name</label>
+      <input type="text" id="t-name" placeholder="e.g. Morning Exercise">
+      <label>Category</label>
+      <select id="t-category">
+        <option>Health & Fitness</option>
+        <option>Learning</option>
+        <option>Mindfulness</option>
+        <option>Productivity</option>
+        <option>Social</option>
+        <option>Other</option>
+      </select>
+      <label>Duration (days) — leave blank for ∞</label>
+      <input type="number" id="t-duration" placeholder="∞" min="1">
+      <label>Priority</label>
+      <select id="t-priority">
+        <option value="high">🔴 High</option>
+        <option value="medium" selected>🟡 Medium</option>
+        <option value="low">🟢 Low</option>
+      </select>
+      <label>Reminder Time (optional)</label>
+      <input type="text" id="t-reminder" placeholder="e.g. 7:00 AM">
+      <label>Color</label>
+      <div class="color-chips" id="t-color-chips">
+        <div class="chip sel" style="background:#c8956c" data-c="#c8956c"></div>
+        <div class="chip" style="background:#8faf8b" data-c="#8faf8b"></div>
+        <div class="chip" style="background:#7b9ec0" data-c="#7b9ec0"></div>
+        <div class="chip" style="background:#c4879b" data-c="#c4879b"></div>
+        <div class="chip" style="background:#b5a06a" data-c="#b5a06a"></div>
+        <div class="chip" style="background:#9b7ec8" data-c="#9b7ec8"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-ghost" style="flex:1" id="task-cancel">Cancel</button>
+        <button class="btn btn-primary" style="flex:1" id="task-save">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTE EDITOR -->
+  <div class="note-editor" id="note-editor">
+    <div class="editor-toolbar">
+      <button class="close-btn" id="ne-back">‹</button>
+      <input type="text" id="ne-title" placeholder="Note title…">
+      <button class="btn btn-primary btn-sm" id="ne-save">Save</button>
+    </div>
+    <div class="editor-body">
+      <textarea class="editor-textarea" id="ne-body"
+        placeholder="Start writing…&#10;&#10;Use this space for daily plans, reminders, events, ideas…"></textarea>
+    </div>
+    <div class="editor-meta">
+      <span style="font-size:11px;color:var(--text2)">Tags:</span>
+      <input class="tag-input" id="ne-tags" placeholder="+ tag" maxlength="30">
+      <span style="font-size:11px;color:var(--text2)" id="ne-saved-date"></span>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
